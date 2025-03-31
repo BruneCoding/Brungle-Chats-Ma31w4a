@@ -136,6 +136,7 @@ async function setupChatApp() {
     
     // Set up real-time listeners
     setupMessageListener();
+  console.log("🔥 New snapshot received with", snapshot.docs.length, "messages");
 }
 
 async function getUsername(uid) {
@@ -175,8 +176,7 @@ async function loadUsers() {
 
 async function loadGroups() {
     // Groups where current user is a member
-    db.collection('groups').where('members', 'array-contains', currentUser.uid)
-        .onSnapshot(snapshot => {
+    db.collection('groups').where('members', 'array-contains', currentUser.uid).onSnapshot(snapshot => {
             groups = [];
             groupsList.innerHTML = '';
             
