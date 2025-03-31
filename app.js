@@ -1,11 +1,12 @@
 // Firebase configuration (replace with your own)
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyBs2SQXVuM65VCIv54zy8ScDQODXu2f1kM",
+  authDomain: "simple-chatting-test.firebaseapp.com",
+  projectId: "simple-chatting-test",
+  storageBucket: "simple-chatting-test.firebasestorage.app",
+  messagingSenderId: "601862347824",
+  appId: "1:601862347824:web:e713904cc35bafd1a521f5",
+  measurementId: "G-BG9X4MPW5H"
 };
 
 // Initialize Firebase
