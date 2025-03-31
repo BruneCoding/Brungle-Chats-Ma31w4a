@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="screen">
+        <div class="auth-container">
+            <h1>Welcome to ChatApp</h1>
+            <div id="auth-form">
+                <input type="text" id="username" placeholder="Choose a username" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button id="signup-btn">Sign Up / Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Chat Screen (hidden initially) -->
+    <div id="chat-screen" class="screen hidden">
+        <div class="sidebar">
+            <div class="user-header">
+                <h2 id="current-username"></h2>
+                <button id="logout-btn">Logout</button>
+            </div>
+            
+            <div class="chat-types">
+                <button id="global-chat-btn" class="active">Global Chat</button>
+                <button id="create-group-btn">Create Group</button>
+            </div>
+            
+            <div id="create-group-form" class="hidden">
+                <input type="text" id="group-name" placeholder="Group name">
+                <input type="text" id="group-members" placeholder="Add usernames (comma separated)">
+                <button id="create-group-submit">Create</button>
+            </div>
+            
+            <div class="contacts-list">
+                <h3>Contacts</h3>
+                <ul id="contacts">
+                    <!-- Dynamically populated -->
+                </ul>
+                
+                <h3>Groups</h3>
+                <ul id="groups">
+                    <!-- Dynamically populated -->
+                </ul>
+            </div>
+        </div>
+        
+        <div class="chat-area">
+            <div class="chat-header">
+                <h2 id="current-chat-name">Global Chat</h2>
+            </div>
+            
+            <div id="messages-container">
+                <!-- Messages will appear here -->
+            </div>
+            
+            <div class="message-input">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
