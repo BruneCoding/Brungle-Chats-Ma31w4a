@@ -1,6 +1,6 @@
 // Firebase configuration (replace with your own)
 
-console.log("Testv1")
+console.log("Testv2")
 const firebaseConfig = {
   apiKey: "AIzaSyBs2SQXVuM65VCIv54zy8ScDQODXu2f1kM",
   authDomain: "simple-chatting-test.firebaseapp.com",
@@ -138,7 +138,7 @@ async function setupChatApp() {
     
     // Set up real-time listeners
     setupMessageListener();
-  console.log("🔥 New snapshot received with", snapshot.docs.length, "messages");
+  
 }
 
 async function getUsername(uid) {
@@ -373,5 +373,42 @@ async function sendMessage() {
 }
 
 function setupMessageListener() {
-    // Already set up in switchChat
+  // 1. Build the query based on chat type
+  let query;
+  if (currentChat.type === 'global') {
+    query = db.collection('messages')
+      .where('chatType', '==', 'global')
+      .orderBy('timestamp', 'asc');
+  } else if (currentChat.type === 'private') {
+    const chatId = [currentUser.uid, currentChat.id].sort().join('_');
+    query = db.collection('messages')
+      .where('chatId', '==', chatId)
+      .orderBy('timestamp', 'asc');
+  } else if (currentChat.type === 'group') {
+    query = db.collection('messages')
+      .where('chatId', '==', currentChat.id)
+      .orderBy('timestamp', 'asc');
+  }
+
+  // 2. Attach the listener with proper error handling
+  return query.onSnapshot((snapshot) => { // <- 'snapshot' is now defined
+    console.log("New messages received:", snapshot.docs.map(doc => doc.data()));
+    
+    // Clear and rebuild the UI
+    messagesContainer.innerHTML = '';
+    snapshot.forEach((doc) => {
+      const msg = doc.data();
+      const msgElement = document.createElement('div');
+      msgElement.className = `message ${msg.senderId === currentUser.uid ? 'sent' : 'received'}`;
+      msgElement.innerHTML = `
+        <div class="message-info">
+          ${msg.senderUsername} • ${msg.timestamp?.toDate().toLocaleTimeString()}
+        </div>
+        <div class="message-text">${msg.text}</div>
+      `;
+      messagesContainer.appendChild(msgElement);
+    });
+  }, (error) => {
+    console.error("Listener error:", error); // Log errors
+  });
 }
