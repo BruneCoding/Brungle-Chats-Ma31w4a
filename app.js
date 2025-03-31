@@ -1,4 +1,6 @@
 // Firebase configuration (replace with your own)
+
+console.log("Testv1")
 const firebaseConfig = {
   apiKey: "AIzaSyBs2SQXVuM65VCIv54zy8ScDQODXu2f1kM",
   authDomain: "simple-chatting-test.firebaseapp.com",
